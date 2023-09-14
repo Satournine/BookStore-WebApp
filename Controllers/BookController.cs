@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using BookStore;
 
 namespace WebApi.AddControllers
 {
@@ -59,10 +60,15 @@ namespace WebApi.AddControllers
             var book = BookList.SingleOrDefault(x => x.Title == newBook.Title);
             if (book is not null)
             {
+                var errorResponse = new ErrorResponse
+                {
+                    StatusCode = 400,
+                    Message = "A book with the same title already exists."
+                };
                 return BadRequest();
             }
             BookList.Add(newBook);
-            return Ok();
+            return StatusCode(201);
         }
 
         [HttpPatch("{id}")]
@@ -71,13 +77,23 @@ namespace WebApi.AddControllers
             var book = BookList.SingleOrDefault(x => x.Id == id);
             if (book is null)
             {
-                return BadRequest();
+                var errorResponse = new ErrorResponse
+                {
+                    StatusCode = 404,
+                    Message = "Resource not found."
+                };
+                return NotFound(errorResponse);
             }
 
             patchedBook.ApplyTo(book, ModelState);
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var errorResponse = new ErrorResponse
+                {
+                    StatusCode = 400,
+                    Message = "Invalid",
+                };
+                return BadRequest(errorResponse);
             }
 
             return Ok(book);
@@ -89,7 +105,12 @@ namespace WebApi.AddControllers
             var book = BookList.SingleOrDefault(x => x.Id == id);
             if (book is null)
             {
-                return BadRequest();
+                var errorResponse = new ErrorResponse
+                {
+                    StatusCode = 404,
+                    Message = "Resource not found."
+                };
+                return NotFound(errorResponse);
             }
             book.Title = updatedBook.Title != default ? updatedBook.Title : book.Title;
             book.Genre = updatedBook.Genre != default ? updatedBook.Genre : book.Genre;
@@ -105,7 +126,12 @@ namespace WebApi.AddControllers
             var book = BookList.SingleOrDefault(x => x.Id == id);
             if (book is null)
             {
-                return BadRequest();
+                var errorResponse = new ErrorResponse
+                {
+                    StatusCode = 404,
+                    Message = "Resource not found."
+                };
+                return NotFound(errorResponse);
             }
             BookList.Remove(book);
             return Ok();
