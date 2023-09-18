@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.JsonPatch;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using BookStore;
+using WebApi.DBOperations;
+
+
 
 namespace WebApi.AddControllers
 {
@@ -12,52 +16,30 @@ namespace WebApi.AddControllers
     [Route("[controller]s")]
     public class BookController : ControllerBase
     {
-        private static List<Book> BookList = new List<Book>()
+        private readonly BookStoreDbContext _context;
+        public BookController(BookStoreDbContext context)
         {
-            new Book
-            {
-                Id = 1,
-                Title = "The Fellowship of the Ring",
-                Genre = "Fantasy",
-                PageCount = 423,
-                PublishDate = new DateTime(1954, 7, 29)
-            },
-            new Book
-            {
-                Id = 2,
-                Title = "The Two Towers",
-                Genre = "Fantasy",
-                PageCount = 352,
-                PublishDate = new DateTime(1954, 11, 11)
-            },
-            new Book
-            {
-                Id = 3,
-                Title = "Dune",
-                Genre = "Science Fiction",
-                PageCount = 412,
-                PublishDate = new DateTime(1965, 6, 1)
-            },
-        };
+            _context = context;
+        }
 
 
         [HttpGet]
         public List<Book> GetBooks()
         {
-            var bookList = BookList.OrderBy(x => x.Id).ToList<Book>();
+            var bookList = _context.Books.OrderBy(x => x.Id).ToList<Book>();
             return bookList;
         }
         [HttpGet("{id}")]
         public Book GetById(int id)
         {
-            var book = BookList.Where(x=> x.Id == id).SingleOrDefault();
+            var book = _context.Books.Where(x=> x.Id == id).SingleOrDefault();
             return book;
         }
 
         [HttpPost]
         public IActionResult AddBook([FromBody] Book newBook)
         {
-            var book = BookList.SingleOrDefault(x => x.Title == newBook.Title);
+            var book = _context.Books.SingleOrDefault(x => x.Title == newBook.Title);
             if (book is not null)
             {
                 var errorResponse = new ErrorResponse
@@ -67,14 +49,15 @@ namespace WebApi.AddControllers
                 };
                 return BadRequest();
             }
-            BookList.Add(newBook);
+            _context.Books.Add(newBook);
+            _context.SaveChanges();
             return StatusCode(201);
         }
 
         [HttpPatch("{id}")]
         public IActionResult PatchBook(int id, [FromBody] JsonPatchDocument<Book> patchedBook)
         {
-            var book = BookList.SingleOrDefault(x => x.Id == id);
+            var book = _context.Books.SingleOrDefault(x => x.Id == id);
             if (book is null)
             {
                 var errorResponse = new ErrorResponse
@@ -95,14 +78,14 @@ namespace WebApi.AddControllers
                 };
                 return BadRequest(errorResponse);
             }
-
+            _context.SaveChanges();
             return Ok(book);
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateBook(int id, [FromBody] Book updatedBook)
         {
-            var book = BookList.SingleOrDefault(x => x.Id == id);
+            var book = _context.Books.SingleOrDefault(x => x.Id == id);
             if (book is null)
             {
                 var errorResponse = new ErrorResponse
@@ -123,7 +106,7 @@ namespace WebApi.AddControllers
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
-            var book = BookList.SingleOrDefault(x => x.Id == id);
+            var book = _context.Books.SingleOrDefault(x => x.Id == id);
             if (book is null)
             {
                 var errorResponse = new ErrorResponse
@@ -133,7 +116,8 @@ namespace WebApi.AddControllers
                 };
                 return NotFound(errorResponse);
             }
-            BookList.Remove(book);
+            _context.Books.Remove(book);
+            _context.SaveChanges();
             return Ok();
         }
     }
