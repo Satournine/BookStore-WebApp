@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using BookStore;
 using WebApi.DBOperations;
-
-
+using WebApi.BookOperations.GetBooks;
+using WebApi.BookOperations.AddBook;
+using static WebApi.BookOperations.AddBook.CreateBookCommand;
 
 namespace WebApi.AddControllers
 {
@@ -24,10 +25,11 @@ namespace WebApi.AddControllers
 
 
         [HttpGet]
-        public List<Book> GetBooks()
+        public IActionResult GetBooks()
         {
-            var bookList = _context.Books.OrderBy(x => x.Id).ToList<Book>();
-            return bookList;
+            GetBooksQuery query = new GetBooksQuery(_context);
+            var result = query.Handle();
+            return Ok(result);
         }
         [HttpGet("{id}")]
         public Book GetById(int id)
@@ -37,21 +39,20 @@ namespace WebApi.AddControllers
         }
 
         [HttpPost]
-        public IActionResult AddBook([FromBody] Book newBook)
+        public IActionResult AddBook([FromBody] CreateBookModel newBook)
         {
-            var book = _context.Books.SingleOrDefault(x => x.Title == newBook.Title);
-            if (book is not null)
+            CreateBookCommand command = new CreateBookCommand(_context);
+            try
             {
-                var errorResponse = new ErrorResponse
-                {
-                    StatusCode = 400,
-                    Message = "A book with the same title already exists."
-                };
-                return BadRequest();
+                command.Model = newBook;
+                command.Handle();
+
             }
-            _context.Books.Add(newBook);
-            _context.SaveChanges();
-            return StatusCode(201);
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            return Ok();
         }
 
         [HttpPatch("{id}")]
