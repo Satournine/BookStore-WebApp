@@ -10,7 +10,7 @@ using WebApi.DBOperations;
 using BookStore.Common;
 
 
-namespace BookStore.BookOperations.DeleteBook
+namespace WebApi.BookOperations.DeleteBook
 {
     public class DeleteBookCommand
     {

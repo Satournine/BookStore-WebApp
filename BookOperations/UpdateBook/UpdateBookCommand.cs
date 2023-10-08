@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using BookStore;
 using WebApi.DBOperations;
-using BookStore.Common;
+using WebApi.Common;
 
-namespace BookStore.BookOperations.UpdateBook
+namespace WebApi.BookOperations.UpdateBook
 {
     public class UpdateBookCommand
     {
