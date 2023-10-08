@@ -3,7 +3,8 @@
     public enum GenreEnum
     {
         personalGrowth = 1,
-        scienceFiction = 2,
+        ScienceFiction = 2,
         Novels = 3,
+        Fantasy = 4,
     }
 }

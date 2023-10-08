@@ -36,7 +36,7 @@ namespace WebApi.DBOperations
                 {
                    //Id = 3,
                     Title = "Dune",
-                    Genre = "Science Fiction",
+                    Genre = "ScienceFiction",
                     PageCount = 412,
                     PublishDate = new DateTime(1965, 6, 1)
                 }
