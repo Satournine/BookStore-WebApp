@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace WebApi.BookOperations.AddBook
+namespace BookStore.Application.BookOperations.Command.AddBook
 {
     public class CreateBookCommandValidator : AbstractValidator<CreateBookCommand>
     {
@@ -9,7 +9,7 @@ namespace WebApi.BookOperations.AddBook
             RuleFor(command => command.Model.GenreId).GreaterThan(0);
             RuleFor(command => command.Model.PageCount).GreaterThan(0);
             RuleFor(command => command.Model.PublishDate.Date).NotEmpty().LessThan(System.DateTime.Now.Date);
-            RuleFor(command => command.Model.Title).NotEmpty().MinimumLength(2);   
+            RuleFor(command => command.Model.Title).NotEmpty().MinimumLength(2);
         }
     }
 }

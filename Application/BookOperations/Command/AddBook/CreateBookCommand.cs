@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BookStore;
 using WebApi.DBOperations;
-using BookStore.Common;
-using AutoMapper;
 
-namespace WebApi.BookOperations.AddBook
+using AutoMapper;
+using BookStore.Entities;
+
+namespace BookStore.Application.BookOperations.Command.AddBook
 {
 
     public class CreateBookCommand

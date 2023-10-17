@@ -7,16 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using BookStore;
 using WebApi.DBOperations;
-using WebApi.BookOperations.GetBooks;
-using WebApi.BookOperations.AddBook;
-using static WebApi.BookOperations.AddBook.CreateBookCommand;
-using WebApi.BookOperations.GetBookDetail;
-using WebApi.BookOperations.UpdateBook;
-using static WebApi.BookOperations.UpdateBook.UpdateBookCommand;
-using WebApi.BookOperations.DeleteBook;
+using static BookStore.Application.BookOperations.Command.AddBook.CreateBookCommand;
+using static BookStore.Application.BookOperations.Command.UpdateBook.UpdateBookCommand;
 using AutoMapper;
 using FluentValidation.Results;
 using FluentValidation;
+using BookStore.Entities;
+using BookStore.Application.BookOperations.Command.AddBook;
+using BookStore.Application.BookOperations.Command.DeleteBook;
+using BookStore.Application.BookOperations.Command.UpdateBook;
+using BookStore.Application.BookOperations.Query.GetBookDetail;
+using BookStore.Application.BookOperations.Query.GetBooks;
 
 namespace WebApi.AddControllers
 {

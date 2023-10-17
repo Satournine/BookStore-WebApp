@@ -5,11 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BookStore;
 using WebApi.DBOperations;
 using WebApi.Common;
 
-namespace WebApi.BookOperations.UpdateBook
+namespace BookStore.Application.BookOperations.Command.UpdateBook
 {
     public class UpdateBookCommand
     {

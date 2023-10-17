@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookStore.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
@@ -11,35 +12,58 @@ namespace WebApi.DBOperations
         {
             using (var context = new BookStoreDbContext(serviceProvider.GetRequiredService<DbContextOptions<BookStoreDbContext>>()))
             {
-                if(context.Books.Any())
+                if (context.Books.Any())
                 {
                     return;
                 }
 
-                context.Books.AddRange(new Book
-                {
-                    //Id = 1,
-                    Title = "The Fellowship of the Ring",
-                    Genre = "Fantasy",
-                    PageCount = 423,
-                    PublishDate = new DateTime(1954, 7, 29)
-                },
-                new Book
-                {
-                    //Id = 2,
-                    Title = "The Two Towers",
-                    Genre = "Fantasy",
-                    PageCount = 352,
-                    PublishDate = new DateTime(1954, 11, 11)
-                },
-                new Book
-                {
-                   //Id = 3,
-                    Title = "Dune",
-                    Genre = "ScienceFiction",
-                    PageCount = 412,
-                    PublishDate = new DateTime(1965, 6, 1)
-                }
+
+                context.Genres.AddRange(
+                    new Genre
+                    {
+                        //Id = 1,
+                        Name = "Personal Growth",
+                    },
+                    new Genre
+                    {
+                        //Id = 2,
+                        Name = "Science Fiction",
+                    },
+                    new Genre
+                    {
+                        //Id = 3,
+                        Name = "Philosophy",
+                    }
+                );
+
+                context.Books.AddRange(
+                    new Book
+                    {
+                        //Id = 1,
+                        Title = "Book of 5 Rings",
+                        
+                        GenreId = 3, //	Philosophy
+                        PageCount = 128,
+                        PublishDate = new DateTime(1645, 1, 1),
+                    },
+                    new Book
+                    {
+                        //Id = 2,
+                        Title = "Meditations",
+                        
+                        GenreId = 3, //	Philosophy
+                        PageCount = 112,
+                        PublishDate = new DateTime(54, 1, 1),
+                    },
+                    new Book
+                    {
+                        //Id = 3,
+                        Title = "Dune",
+                      
+                        GenreId = 2, //	Science-Fiction
+                        PageCount = 879,
+                        PublishDate = new DateTime(2001, 1, 1),
+                    }
                 );
 
                 context.SaveChanges();

@@ -5,12 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BookStore;
 using WebApi.DBOperations;
-using BookStore.Common;
 
 
-namespace WebApi.BookOperations.DeleteBook
+namespace BookStore.Application.BookOperations.Command.DeleteBook
 {
     public class DeleteBookCommand
     {
@@ -33,7 +31,7 @@ namespace WebApi.BookOperations.DeleteBook
         }
         public class CreateBookModel
         {
-            
+
         }
     }
 }
