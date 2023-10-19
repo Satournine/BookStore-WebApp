@@ -29,9 +29,5 @@ namespace BookStore.Application.BookOperations.Command.DeleteBook
             _dbcontext.Books.Remove(book);
             _dbcontext.SaveChanges();
         }
-        public class CreateBookModel
-        {
-
-        }
     }
 }

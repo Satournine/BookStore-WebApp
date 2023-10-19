@@ -17,4 +17,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\AuthorOperations\Command\DeleteAuthor\" />
+    <Folder Include="Application\AuthorOperations\Command\UpdateAuthor\" />
+    <Folder Include="Application\AuthorOperations\Query\GetAuthorDetail\" />
+  </ItemGroup>
+
 </Project>
