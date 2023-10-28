@@ -11,6 +11,7 @@
           "BookStore": "1.0.0",
           "FluentAssertions": "6.12.0",
           "Microsoft.EntityFrameworkCore": "5.0.17",
+          "Microsoft.EntityFrameworkCore.InMemory": "5.0.17",
           "Microsoft.NET.Test.Sdk": "17.5.0",
           "Moq": "4.20.69",
           "coverlet.collector": "3.2.0",
