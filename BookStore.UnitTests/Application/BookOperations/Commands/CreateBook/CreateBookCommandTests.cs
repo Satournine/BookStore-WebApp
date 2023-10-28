@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BookStore.Application.BookOperations.Command.AddBook;
+using BookStore.Application.BookOperations.Query.GetBookDetail;
 using BookStore.Entities;
 using BookStore.UnitTests.TestSetup;
 using FluentAssertions;
@@ -33,7 +34,7 @@ namespace BookStore.UnitTests.Application.BookOperations.Commands.CreateBook
             _context.Books.Add(book);   
             _context.SaveChanges();
 
-            CreateBookCommand command = new CreateBookCommand(_context, _mapper);
+            GetBookDetailQuery command = new GetBookDetailQuery(_context, _mapper);
             command.Model = new CreateBookModel() { Title = book.Title };
 
             //act & Assert
