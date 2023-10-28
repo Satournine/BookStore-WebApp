@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.DBOperations;
+using System;
 using System.Linq;
 using WebApi.DBOperations;
 
@@ -7,10 +8,10 @@ namespace BookStore.Application.GenreOperations.Command.DeleteGenre
     public class DeleteGenreCommand
     {
         public int GenreId { get; set; }
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
 
 
-        public DeleteGenreCommand(BookStoreDbContext context)
+        public DeleteGenreCommand(IBookStoreDbContext context)
         {
             _context = context;
         }

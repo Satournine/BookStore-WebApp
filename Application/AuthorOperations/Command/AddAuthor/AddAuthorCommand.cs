@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookStore.DBOperations;
 using BookStore.Entities;
 using System;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace BookStore.Application.AuthorOperations.Command.AddAuthor
     public class AddAuthorCommand
     {
         public AddAuthorModel Model { get; set; }
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
-        public AddAuthorCommand(BookStoreDbContext context, IMapper mapper)
+        public AddAuthorCommand(IBookStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

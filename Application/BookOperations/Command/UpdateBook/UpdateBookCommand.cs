@@ -7,15 +7,16 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApi.DBOperations;
 using WebApi.Common;
+using BookStore.DBOperations;
 
 namespace BookStore.Application.BookOperations.Command.UpdateBook
 {
     public class UpdateBookCommand
     {
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         public int BookId { get; set; }
         public UpdateBookModel Model { get; set; }
-        public UpdateBookCommand(BookStoreDbContext context)
+        public UpdateBookCommand(IBookStoreDbContext context)
         {
             _dbContext = context;
         }

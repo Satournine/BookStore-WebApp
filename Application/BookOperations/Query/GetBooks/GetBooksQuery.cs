@@ -8,14 +8,15 @@ using System.Linq;
 using WebApi.DBOperations;
 using AutoMapper;
 using BookStore.Entities;
+using BookStore.DBOperations;
 
 namespace BookStore.Application.BookOperations.Query.GetBooks
 {
     public class GetBooksQuery
     {
         private readonly IMapper _mapper;
-        private readonly BookStoreDbContext _dbContext;
-        public GetBooksQuery(BookStoreDbContext dbContext, IMapper mapper)
+        private readonly IBookStoreDbContext _dbContext;
+        public GetBooksQuery(IBookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;

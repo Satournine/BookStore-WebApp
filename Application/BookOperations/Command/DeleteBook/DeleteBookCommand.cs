@@ -6,15 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebApi.DBOperations;
-
+using BookStore.DBOperations;
 
 namespace BookStore.Application.BookOperations.Command.DeleteBook
 {
     public class DeleteBookCommand
     {
-        private readonly BookStoreDbContext _dbcontext;
+        private readonly IBookStoreDbContext _dbcontext;
         public int BookId { get; set; }
-        public DeleteBookCommand(BookStoreDbContext dbContext)
+        public DeleteBookCommand(IBookStoreDbContext dbContext)
         {
             _dbcontext = dbContext;
         }

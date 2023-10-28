@@ -4,6 +4,7 @@ using BookStore.Application.AuthorOperations.Command.DeleteAuthor;
 using BookStore.Application.AuthorOperations.Command.UpdateAuthor;
 using BookStore.Application.AuthorOperations.Query.GetAuthorDetail;
 using BookStore.Application.AuthorOperations.Query.GetAuthors;
+using BookStore.DBOperations;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DBOperations;
@@ -14,10 +15,10 @@ namespace BookStore.Controllers
     [Route("[controller]s")]
     public class AuthorController : ControllerBase
     {
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
 
-        public AuthorController(BookStoreDbContext context, IMapper mapper)
+        public AuthorController(IBookStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -27,8 +28,10 @@ namespace BookStore.Controllers
         public ActionResult GetAuthors()
         {
             GetAuthorsQuery query = new GetAuthorsQuery(_context, _mapper);
-            var obj = query.Handle();
-            return Ok(obj);
+            return Ok(query.Handle());
+            //GetAuthorsQuery query = new GetAuthorsQuery(_context, _mapper);
+            //var obj = query.Handle();
+            //return Ok(obj);
         }
         [HttpGet("{id}")]
         public ActionResult GetGenreDetail(int id)

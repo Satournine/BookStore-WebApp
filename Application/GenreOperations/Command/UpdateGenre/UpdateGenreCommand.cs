@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookStore.DBOperations;
+using System;
 using System.Linq;
 using WebApi.DBOperations;
 
@@ -8,8 +9,8 @@ namespace BookStore.Application.GenreOperations.Command.UpdateGenre
     {
         public int GenreId { get; set; }
         public UpdateGenreModel Model { get; set; }
-        private readonly BookStoreDbContext _context;
-        public UpdateGenreCommand(BookStoreDbContext context)
+        private readonly IBookStoreDbContext _context;
+        public UpdateGenreCommand(IBookStoreDbContext context)
         {
             _context = context;
         }

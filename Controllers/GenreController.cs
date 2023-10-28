@@ -4,6 +4,7 @@ using BookStore.Application.GenreOperations.Command.DeleteGenre;
 using BookStore.Application.GenreOperations.Command.UpdateGenre;
 using BookStore.Application.GenreOperations.Query.GetGenreDetail;
 using BookStore.Application.GenreOperations.Query.GetGenres;
+using BookStore.DBOperations;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.DBOperations;
@@ -14,10 +15,10 @@ namespace BookStore.Controllers
     [Route("[controller]s")]
     public class GenreController : ControllerBase
     {
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
 
-        public GenreController(BookStoreDbContext context, IMapper mapper)
+        public GenreController(IBookStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

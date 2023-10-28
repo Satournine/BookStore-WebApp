@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookStore.DBOperations;
 using System;
 using System.Linq;
 using WebApi.DBOperations;
@@ -7,10 +8,10 @@ namespace BookStore.Application.AuthorOperations.Command.DeleteAuthor
 {
     public class DeleteAuthorCommand
     {
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
 
         public int AuthorId { get; set; }
-        public DeleteAuthorCommand(BookStoreDbContext context)
+        public DeleteAuthorCommand(IBookStoreDbContext context)
         {
             _context = context;
 

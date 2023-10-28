@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookStore.DBOperations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,13 +11,15 @@ namespace BookStore.Application.AuthorOperations.Query.GetAuthors
     public class GetAuthorsQuery
     {
 
-        private readonly BookStoreDbContext _context;
+        private readonly IBookStoreDbContext _context;
         private readonly IMapper _mapper;
-        public GetAuthorsQuery(BookStoreDbContext context, IMapper mapper)
+
+        public GetAuthorsQuery(IBookStoreDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
+
         public List<AuthorsViewModel> Handle()
         {
             var authorList = _context.Authors.ToList();

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BookStore.DBOperations;
 using BookStore.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,11 @@ namespace BookStore.Application.GenreOperations.Query.GetGenres
 {
     public class GetGenresQuery
     {
-        public readonly BookStoreDbContext _context;
+        public readonly IBookStoreDbContext _context;
 
         public readonly IMapper _mapper;
 
-        public GetGenresQuery(BookStoreDbContext context, IMapper mapper)
+        public GetGenresQuery(IBookStoreDbContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;

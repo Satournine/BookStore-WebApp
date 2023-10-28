@@ -1,3 +1,4 @@
+using BookStore.DBOperations;
 using BookStore.Middleware;
 using BookStore.Services;
 using Microsoft.AspNetCore.Builder;
@@ -32,6 +33,7 @@ namespace WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
             });
             services.AddDbContext<BookStoreDbContext>(options => options.UseInMemoryDatabase(databaseName: "BookStoreDB"));
+            services.AddScoped<IBookStoreDbContext>(provider => provider.GetService<BookStoreDbContext>());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddSingleton<ILoggerService, ConsoleLogger>();
         }

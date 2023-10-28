@@ -9,6 +9,7 @@ using WebApi.DBOperations;
 
 using AutoMapper;
 using BookStore.Entities;
+using BookStore.DBOperations;
 
 namespace BookStore.Application.BookOperations.Command.AddBook
 {
@@ -16,9 +17,9 @@ namespace BookStore.Application.BookOperations.Command.AddBook
     public class CreateBookCommand
     {
         public CreateBookModel Model { get; set; }
-        private readonly BookStoreDbContext _dbContext;
+        private readonly IBookStoreDbContext _dbContext;
         private readonly IMapper _mapper;
-        public CreateBookCommand(BookStoreDbContext dbContext, IMapper mapper)
+        public CreateBookCommand(IBookStoreDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
