@@ -34,7 +34,7 @@ namespace BookStore.UnitTests.Application.BookOperations.Commands.CreateBook
             _context.Books.Add(book);   
             _context.SaveChanges();
 
-            GetBookDetailQuery command = new GetBookDetailQuery(_context, _mapper);
+            CreateBookCommand command = new CreateBookCommand(_context, _mapper);
             command.Model = new CreateBookModel() { Title = book.Title };
 
             //act & Assert
