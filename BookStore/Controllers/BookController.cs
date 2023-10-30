@@ -19,9 +19,11 @@ using BookStore.Application.BookOperations.Command.UpdateBook;
 using BookStore.Application.BookOperations.Query.GetBookDetail;
 using BookStore.Application.BookOperations.Query.GetBooks;
 using BookStore.DBOperations;
+using Microsoft.AspNetCore.Authorization;
 
-namespace WebApi.AddControllers
+namespace WebApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]s")]
     public class BookController : ControllerBase

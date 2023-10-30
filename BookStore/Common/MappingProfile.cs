@@ -6,8 +6,11 @@ using BookStore.Application.BookOperations.Query.GetBookDetail;
 using BookStore.Application.BookOperations.Query.GetBooks;
 using BookStore.Application.GenreOperations.Query.GetGenreDetail;
 using BookStore.Application.GenreOperations.Query.GetGenres;
+using BookStore.Application.UserOperations.Commands.CreateUserCommand;
+using BookStore.Controllers;
 using BookStore.Entities;
 using static BookStore.Application.BookOperations.Command.AddBook.CreateBookCommand;
+using static BookStore.Application.UserOperations.Commands.CreateUserCommand.CreateUserCommand;
 
 namespace WebApi.Common
 {
@@ -25,6 +28,8 @@ namespace WebApi.Common
             CreateMap<AddAuthorModel, Author>();
             CreateMap<Author, AuthorsViewModel>();
             CreateMap<Author, AuthorDetailViewModel>();
+
+            CreateMap<CreateUserModel, Users>();
         }
     }
 }
